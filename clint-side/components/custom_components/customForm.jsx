@@ -14,13 +14,9 @@ import { Input } from "@/components/ui/input";
 import { useZodFormValidation } from "@/utils/formSchima";
 import { User } from "lucide-react";
 
-const CustomForm = ({ schema, initialValues, inputData = [], btnText }) => {
-  const { form, onSubmit } = useZodFormValidation(schema, initialValues);
-  const handleFormSubmit = async (data) => {
-    console.log("Submitted data:", data);
-    const submittedData = await onSubmit(data);
-  };
-  console.log(form.formState.errors["email"]);
+const CustomForm = ({ handleFormSubmit,schema, initialValues, inputData = [], btnText }) => {
+  const { form } = useZodFormValidation(schema, initialValues);
+  
   return (
     <div>
       <Form {...form}>
@@ -49,16 +45,15 @@ const CustomForm = ({ schema, initialValues, inputData = [], btnText }) => {
                       />
                     </div>
                   </FormControl>
-                  <FormDescription>
-                    {console.log(form.formState.errors)}
-                  </FormDescription>
-                  {console.log()}
+                  {/* <FormDescription>
+                    {form.formState.errors}
+                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
             />
           ))}
-          <Button type="submit">{btnText}</Button>
+          <Button type="submit" className="w-3/4 bg-violet-800">{btnText}</Button>
         </form>
       </Form>
     </div>

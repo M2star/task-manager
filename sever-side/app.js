@@ -2,11 +2,14 @@ const express = require("express");
 const { connectToDb } = require("./database/connection");
 const ConnectToDb = require("./database/connection");
 const task = require("./routes/routes");
+var cors = require('cors')
+
+
 const app = express();
 require("dotenv").config();
 const PORT = 3000;
 app.use(express.json());
-
+app.use(cors())
 app.use("/api/v1/tasks", task);
 
 // app.get("/", (req, res) => {
