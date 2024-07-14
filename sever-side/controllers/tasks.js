@@ -10,7 +10,7 @@ const login = async (req, res) => {
     return res.status(400).json({
       err: "user not found",
       msg: "user not found",
-      status: 501,
+      resp_code: 400,
     });
   }
   const isMatch = await bcrypt.compare(password, user.password);
@@ -18,7 +18,7 @@ const login = async (req, res) => {
     return res.status(400).json({
       err: "invalid password",
       msg: "invalid password",
-      status: 501,
+      resp_code: 400,
     });
   }
   const token = await jwt.sign(
@@ -26,6 +26,9 @@ const login = async (req, res) => {
     process.env.JWT_SECRET_KEY,
     { expiresIn: "12h" }
   );
+
+  res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; Max-Age=43200; SameSite=Strict`);
+  
   res.status(200).json({
     msg: "user login successful",
     resp_code: "200",

@@ -1,7 +1,4 @@
-"use client"
-
 import axios from "axios";
-console.log(process.env.NEXT_PUBLIC_BASE_URL)
 const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL
   });
